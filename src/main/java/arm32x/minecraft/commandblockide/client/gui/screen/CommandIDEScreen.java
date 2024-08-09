@@ -261,7 +261,10 @@ public abstract class CommandIDEScreen<E extends CommandEditor> extends Screen i
 	}
 
 	public void setScrollOffset(int offset) {
-		scrollOffset = MathHelper.clamp(offset, 0, maxScrollOffset);
+		// Don't force the scroll offset to suddenly "jump" back to an in-bounds
+		// value; instead, just prevent it from going further astray.
+		int effectiveMaxScrollOffset = Math.max(scrollOffset, maxScrollOffset);
+		scrollOffset = MathHelper.clamp(offset, 0, effectiveMaxScrollOffset);
 		repositionEditors();
 	}
 
