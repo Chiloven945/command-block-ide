@@ -103,7 +103,10 @@ public abstract class CommandIDEScreen<E extends CommandEditor> extends Screen i
 	}
 
 	protected void addEditor(E editor) {
-		editor.setHeightChangedListener(height -> repositionEditors());
+		editor.setHeightChangedListener(height -> {
+			repositionEditors();
+			setScrollOffset(Math.min(scrollOffset, combinedEditorHeight - 20));
+		});
 		editors.add(editor);
 		addSelectableChild(editor);
 	}
