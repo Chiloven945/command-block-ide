@@ -249,7 +249,7 @@ public abstract class CommandIDEScreen<E extends CommandEditor> extends Screen i
 		}
 
 		double amount = Screen.hasShiftDown() ? 0 : verticalAmount;
-		if (maxScrollOffset != 0 && amount != 0 && mouseY < height - 36 && !Screen.hasShiftDown()) {
+		if (amount != 0 && mouseY < height - 36 && !Screen.hasShiftDown()) {
 			setScrollOffset(getScrollOffset() - (int)Math.round(amount * SCROLL_SENSITIVITY));
 			return true;
 		}
