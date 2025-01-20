@@ -84,7 +84,7 @@ public final class CommandBlockTypeButton extends IconButton implements Dirtyabl
 		RenderSystem.enableDepthTest();
 		if (active) {
 			RenderSystem.setShaderColor(0.0f, 0.0f, 0.0f, 0.25f);
-			context.drawTexture(texture, getX() + 1, getY() + 1, 0.0f, 0.0f, width, height, 16, 64);
+			context.drawTexture(RenderLayer::getGuiTextured, texture, getX() + 1, getY() + 1, 0.0f, 0.0f, width, height, 16, 64);
 		}
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, active ? 1.0f : 0.5f);
 		RenderSystem.setShaderTexture(0, texture);

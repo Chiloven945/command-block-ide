@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.PressableWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -55,9 +56,9 @@ public abstract class IconButton extends PressableWidget {
 		if (drawsBackground) {
 			float brightness = active ? 1.0f : (float)0xA0 / 0xFF;
 			RenderSystem.setShaderColor(brightness / 4, brightness / 4, brightness / 4, alpha);
-			context.drawTexture(texture, iconX + 1, iconY + 1, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
+			context.drawTexture(RenderLayer::getGuiTextured, texture, iconX + 1, iconY + 1, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
 			RenderSystem.setShaderColor(brightness, brightness, brightness, alpha);
-			context.drawTexture(texture, iconX, iconY, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
+			context.drawTexture(RenderLayer::getGuiTextured, texture, iconX, iconY, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
 		} else {
 			RenderSystem.enableBlend();
 			RenderSystem.defaultBlendFunc();
@@ -65,10 +66,10 @@ public abstract class IconButton extends PressableWidget {
 
 			if (active) {
 				RenderSystem.setShaderColor(0.0f, 0.0f, 0.0f, 0.25f * alpha);
-				context.drawTexture(texture, iconX + 1, iconY + 1, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
+				context.drawTexture(RenderLayer::getGuiTextured, texture, iconX + 1, iconY + 1, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
 			}
 			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, active ? alpha : 0.5f * alpha);
-			context.drawTexture(texture, iconX, iconY, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
+			context.drawTexture(RenderLayer::getGuiTextured, texture, iconX, iconY, 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
 
 			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 			RenderSystem.disableDepthTest();
